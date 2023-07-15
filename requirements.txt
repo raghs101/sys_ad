@@ -1,0 +1,9 @@
+socket
+os
+zlib
+zipfile
+threading
+re
+mysql.connector
+pycrypto
+pycryptodome

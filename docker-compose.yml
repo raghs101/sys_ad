@@ -1,0 +1,25 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - 9999:9999
+
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: delta@sql
+      MYSQL_DATABASE: server
+    volumes:
+      - ./db/server_client.sql:/docker-entrypoint-initdb.d/server_client.sql
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - 8080:8080
